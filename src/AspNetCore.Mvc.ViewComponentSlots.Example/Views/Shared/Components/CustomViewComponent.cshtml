@@ -1,0 +1,20 @@
+@model AspNetCore.Mvc.ViewComponentSlots.Example.Views.Shared.Components.CustomViewComponent
+
+<h1>Custom View Component</h1>
+
+<h3>Second slot content</h3>
+<vc:slot name="second"><p>please supply a value for my second slot</p></vc:slot>
+
+<h3>First slot content</h3>
+<vc:slot name="first"><p>please supply a value for my first slot</p></vc:slot>
+
+<h3>Default slot content</h3>
+<vc:slot><p>please supply a value for my default slot</p></vc:slot>
+
+<h3>Repeating slots render the same data</h3>
+<vc:slot name="first">please supply a value for my first slot</vc:slot>
+<vc:slot name="second">please supply a value for my second slot</vc:slot>
+<vc:slot><p>please supply a value for my default slot</p></vc:slot>
+
+<h3>Nesting components with slots works</h3>
+<vc:slot name="nested">no nested content supplied</vc:slot>
