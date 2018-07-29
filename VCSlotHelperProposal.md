@@ -12,18 +12,26 @@ When building component based presentation a number of useful features present i
 * The ability to show default content if user supplied content was not provided
 * Child content mechanism is supplied and supported by the framework, standardizing syntax and usage.
 
-With View Component slots developers can build truely re-usable components that can also take user supplied content.
+Allowing view components to accept child content provides new ways to build complex component driven presentation.
 
 ## Use Case Example
 
-Within some calling view, instantiating a View Component via a tag helper, supplying child content:
+Within some calling view, instantiating a View Component via a tag helper and supplying child content:
 
 Calling View:
 ```html
 <vc:custom-view-component>
-    <div vc:slot="first-slot">Some child content in the first slot!</div>
-    <div vc:slot="second-slot">Some child content in the second slot!</div>
-    remaining child content in default slot!
+    <p>My Default Slot Content!</p>
+    <p vc:slot="first">My First Slot Content!</p>
+    <p vc:slot="second">My Second Slot Content!</p>
+
+    <vc:custom-view-component vc:slot="nested">
+        <p>My NESTED Default Slot Content!</p>
+        <p vc:slot="first">My NESTED First Slot Content!</p>
+        <p vc:slot="second">My NESTED Second Slot Content!</p>
+    </vc:custom-view-component>
+
+    <p>More Default Slot Content!</p>
 </vc:custom-view-component>
 ```
 
@@ -31,22 +39,31 @@ The ViewComponents view template would provide the slot mechanism to place the u
 
 View Component Template:
 ```html
-<style>
-    div {
-        border: 1px solid black;
-    }
-</style>
-<div>
-    <vc:slot name="second-slot">some default content if none supplied</vc:slot>
-    <div>
-        <p>Lorem ipsum dolor sit amet.....</p>
-        <p><vc:slot>default slot with no name</vc:slot></p>
-    </div>
-    <vc:slot name="first-slot">some default content if none supplied</vc:slot>
+<h1>Custom View Component</h1>
+
+<h3>Second slot content</h3>
+<vc:slot name="second"><p>please supply a value for my second slot</p></vc:slot>
+
+<h3>First slot content</h3>
+<vc:slot name="first"><p>please supply a value for my first slot</p></vc:slot>
+
+<h3>Default slot content</h3>
+<vc:slot><p>please supply a value for my default slot</p></vc:slot>
+
+<h3>Repeating slots render the same data</h3>
+<vc:slot name="first">please supply a value for my first slot</vc:slot>
+<vc:slot name="second">please supply a value for my second slot</vc:slot>
+<vc:slot><p>please supply a value for my default slot</p></vc:slot>
+
+<h3>Nesting components with slots works</h3>
+<div style="border-left:1px solid black;padding-left:20px;">
+    <vc:slot name="nested">no nested content supplied</vc:slot>
 </div>
 ```
 
-The View Component slotting mechanism will take care of rendering the user supplied child content into the correct slots in the View Component's user defined slot locations.
+The View Component slotting mechanism will take care of rendering the user supplied child content into the correct slots in the View Component's user defined slot locations. Example output of the following:
+
+![alt text](slots_example_output.png "oops")
 
 
 # Inspiration
@@ -75,7 +92,7 @@ Some potential requirements determined while researching this proposal:
 
 To facilitate interest in this proposal a simple experiement was built to showcase the View Component Slotting mechanism in action. This experiement does not necessarly implement all identified requirements and is not guarenteed to be bug-free.
 
-https://github.com/rlaitila/AspNetCore.Mvc.ViewComponentSlots.Proposal
+https://github.com/rdlaitila/AspNetCore.Mvc.ViewComponentSlots
 
 what should work:
 
@@ -83,7 +100,7 @@ what should work:
 * Ability to supply arbitrary (non slot targeted) child content that will be placed in the parent View Component's default `<vc:slot>`
 * Ability to supply slot targeted child content that will be placed in a matching `<vc:slot>` element in the View Component's view template where a slot with attribute `name="[slot_name]"` exists (ex: `<vc:slot name="some-slot"`>)
 * Ability for View Component Slots to render default content if no user supplied child content targeting that slot was supplied.
-* Ability to render nested View Component Tag Helpers and slots (not fully tested, may have issues)
+* Ability to render nested View Component Tag Helpers and slots
 * tag parameter expression binding within user supplied child content
 
 differences:
@@ -95,11 +112,11 @@ differences:
 
 Unfortunatly I will be time limited to focus on a core contribution of View Component Slots to aspnet/Mvc and don't posses deep enough knolwedge of contribution guidelines or the Mvc sources to properly facilitate implementation of this proposal.
 
-I can however allocate some time to improve the [experimental proposal implementation](https://github.com/rlaitila/AspNetCore.Mvc.ViewComponentSlots.Proposal) as needed and respond to community issues and pull requests on a best-effort basis. I hope the experimental implementation can validate that this use case is valid and valuable to others.
+I can however allocate some time to improve the [experimental proposal implementation](https://github.com/rdlaitila/AspNetCore.Mvc.ViewComponentSlots) as needed and respond to community issues and pull requests on a best-effort basis. I hope the experimental implementation can validate that this use case is valid and valuable to others.
 
 # Community Contribution
 
-
+I would be excited to see community members either help improve the example implementation or help propose how to best implement such a feature into the Mvc core.
 
 
 

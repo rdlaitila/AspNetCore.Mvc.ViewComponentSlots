@@ -64,7 +64,7 @@ namespace AspNetCore.Mvc.ViewComponentSlots
 
             if (!string.IsNullOrWhiteSpace(childContent))
             {
-                SlotTagHelper.Contexts.Peek().SlotPlacements.Add(new SlotPlacement
+                SlotTagHelper.Contexts.Peek().Placements.Add(new SlotPlacement
                 {
                     Selector = string.Empty,
                     TagName = null,

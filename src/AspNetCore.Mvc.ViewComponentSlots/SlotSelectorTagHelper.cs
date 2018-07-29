@@ -34,7 +34,7 @@ namespace AspNetCore.Mvc.ViewComponentSlots
                 output.Content.GetContent() :
                 (await output.GetChildContentAsync()).GetContent();
 
-            SlotTagHelper.Contexts.Peek().SlotPlacements.Add(new SlotPlacement
+            SlotTagHelper.Contexts.Peek().Placements.Add(new SlotPlacement
             {
                 Selector = selector,
                 TagName = context.TagName,

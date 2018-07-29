@@ -5,6 +5,6 @@ namespace AspNetCore.Mvc.ViewComponentSlots
 {
     internal class SlotContext
     {
-        internal List<SlotPlacement> SlotPlacements = new List<SlotPlacement>();
+        internal List<SlotPlacement> Placements = new List<SlotPlacement>();
     }
 }

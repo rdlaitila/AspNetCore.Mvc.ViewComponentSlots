@@ -14,26 +14,33 @@ namespace AspNetCore.Mvc.ViewComponentSlots
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var selector = Util.ExtractSlotSelector(context, "name");
-            var slotPlacement = Contexts.Peek().SlotPlacements.FirstOrDefault(a => a.Selector == selector);
 
-            if (slotPlacement != null)
+            if (!Contexts.Any())
+                return;
+
+            var slotPlacement = Contexts
+                .Peek()
+                .Placements
+                .FirstOrDefault(a => a.Selector == selector);
+
+            if (slotPlacement == null)
             {
-                output.TagName = slotPlacement.TagName;
-                output.Attributes.Clear();
-
-                slotPlacement.Attributes.ToList().ForEach(attr =>
-                    output.Attributes.Add(attr.Name, attr.Value)
+                // default slot content if no pending slot placement is present
+                output.TagName = null;
+                output.Content.SetHtmlContent(
+                    (await output.GetChildContentAsync()).GetContent()
                 );
-
-                output.Content.SetHtmlContent(slotPlacement.Content);
                 return;
             }
 
-            // default slot content if no pending slot placement is present
-            output.TagName = null;
-            output.Content.SetHtmlContent(
-                (await output.GetChildContentAsync()).GetContent()
+            output.TagName = slotPlacement.TagName;
+            output.Attributes.Clear();
+
+            slotPlacement.Attributes.ToList().ForEach(attr =>
+                output.Attributes.Add(attr.Name, attr.Value)
             );
+
+            output.Content.SetHtmlContent(slotPlacement.Content);
         }
     }
 }
