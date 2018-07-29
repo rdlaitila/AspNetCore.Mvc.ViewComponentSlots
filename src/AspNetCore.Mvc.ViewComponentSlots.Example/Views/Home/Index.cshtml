@@ -7,14 +7,11 @@
     <p vc:slot="first">My First Slot Content!</p>
     <p vc:slot="second">My Second Slot Content!</p>
 
-    <!-- nesting works mostly as expected however child view component elements need to be
-         wrapped in a standard element as there is an issue with view component elements
-         specifying the "vc" and "vc:slot" attributes. -->
-    <div vc:slot="nested" style="padding-left:20px;border-left:1px solid black;">
-        <custom-view-component vc>
-            <p>My NESTED Default Slot Content!</p>
-            <p vc:slot="first">My NESTED First Slot Content!</p>
-            <p vc:slot="second">My NESTED Second Slot Content!</p>
-        </custom-view-component>
-    </div>
+    <custom-view-component vc vc:slot="nested">
+        <p>My NESTED Default Slot Content!</p>
+        <p vc:slot="first">My NESTED First Slot Content!</p>
+        <p vc:slot="second">My NESTED Second Slot Content!</p>
+    </custom-view-component>
+
+    <p>More Default Slot Content!</p>
 </custom-view-component>

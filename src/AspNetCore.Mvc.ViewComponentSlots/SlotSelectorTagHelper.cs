@@ -18,20 +18,28 @@ namespace AspNetCore.Mvc.ViewComponentSlots
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var selector = Util.ExtractSlotSelector(context, "vc:slot");
+            var isElementVc = context.AllAttributes.Any(attr => attr.Name == "vc");
 
             if (selector == string.Empty)
+                return;
+
+            if (!SlotTagHelper.Contexts.Any())
                 return;
 
             var attrs = new TagHelperAttributeList(
                 context.AllAttributes.Where(a => a.Name != "vc:slot").ToArray()
             );
 
+            var content = isElementVc ?
+                output.Content.GetContent() :
+                (await output.GetChildContentAsync()).GetContent();
+
             SlotTagHelper.Contexts.Peek().SlotPlacements.Add(new SlotPlacement
             {
                 Selector = selector,
                 TagName = context.TagName,
                 Attributes = attrs,
-                Content = (await output.GetChildContentAsync()).GetContent(),
+                Content = content,
             });
 
             output.SuppressOutput();

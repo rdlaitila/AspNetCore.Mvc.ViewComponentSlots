@@ -75,12 +75,12 @@ namespace AspNetCore.Mvc.ViewComponentSlots
 
             (_viewComponentHelper as IViewContextAware).Contextualize(ViewContext);
 
-            output.Content.SetHtmlContent(
-                await _viewComponentHelper.InvokeAsync(
-                    matchingViewComponent,
-                    Util.ExtractComponentArgs(context)
-                )
+            var componentOutput = await _viewComponentHelper.InvokeAsync(
+                matchingViewComponent,
+                Util.ExtractComponentArgs(context)
             );
+
+            output.Content.SetHtmlContent(componentOutput);
 
             SlotTagHelper.Contexts.Pop();
         }

@@ -26,11 +26,11 @@ namespace AspNetCore.Mvc.ViewComponentSlots
                 );
 
                 output.Content.SetHtmlContent(slotPlacement.Content);
-
                 return;
             }
 
             // default slot content if no pending slot placement is present
+            output.TagName = null;
             output.Content.SetHtmlContent(
                 (await output.GetChildContentAsync()).GetContent()
             );
