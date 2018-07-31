@@ -21,6 +21,10 @@ namespace AspNetCore.Mvc.ViewComponentSlots
             get { return int.MinValue; }
         }
 
+        [HtmlAttributeName(DictionaryAttributePrefix="param:")]
+        public IDictionary<string, object> Attributes {get; private set;}
+            = new Dictionary<string, object>();
+
         [HtmlAttributeNotBound]
         [ViewContext]
         public ViewContext ViewContext { get; set; }
@@ -75,9 +79,18 @@ namespace AspNetCore.Mvc.ViewComponentSlots
 
             (_viewComponentHelper as IViewContextAware).Contextualize(ViewContext);
 
+            var componentParams = matchingViewComponent
+                .GetMethod("InvokeAsync")
+                .GetParameters();
+
+            var componentArgs = Util.ExtractComponentArgs(
+                componentParams,
+                Attributes
+            );
+
             var componentOutput = await _viewComponentHelper.InvokeAsync(
                 matchingViewComponent,
-                Util.ExtractComponentArgs(context)
+                componentArgs
             );
 
             output.Content.SetHtmlContent(componentOutput);

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -20,25 +22,22 @@ namespace AspNetCore.Mvc.ViewComponentSlots
             );
         }
 
-        internal static IDictionary<string, object> ExtractComponentArgs(TagHelperContext context)
+        internal static IDictionary<string, object> ExtractComponentArgs(ParameterInfo[] parameters, IDictionary<string, object> args)
         {
-            return context
-                .AllAttributes
-                .Where(attr => attr.Name != "vc")
-                .ToDictionary(
-                    key => key.Name,
-                    value => ConvertComponentArg(value.Value)
+            var result = new Dictionary<string, object>();
+
+            foreach(var @param in parameters)
+            {
+                var arg = args.FirstOrDefault(kv =>
+                    KebabToPascal(kv.Key).ToLower() == @param.Name.ToLower()
                 );
-        }
 
-        internal static object ConvertComponentArg(object arg)
-        {
-            var argType = arg.GetType();
+                if (arg.Value == null) continue;
 
-            if (argType == typeof(HtmlString))
-                return ((HtmlString)arg).Value;
+                result[@param.Name] = arg.Value;
+            }
 
-            return arg;
+            return result;
         }
 
         internal static string ExtractSlotSelector(TagHelperContext context, string selectorName)

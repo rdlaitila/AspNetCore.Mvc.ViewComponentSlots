@@ -2,12 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-<custom-view-component vc>
+<custom-view-component vc param:foo="@("foo value")" param:bar="@(1.1f)">
     <p>My Default Slot Content!</p>
     <p vc:slot="first">My First Slot Content!</p>
     <p vc:slot="second">My Second Slot Content!</p>
 
-    <custom-view-component vc vc:slot="nested">
+    <custom-view-component vc vc:slot="nested" param:foo="@("NESTED foo value")" param:bar="@(2.1f)">
         <p>My NESTED Default Slot Content!</p>
         <p vc:slot="first">My NESTED First Slot Content!</p>
         <p vc:slot="second">My NESTED Second Slot Content!</p>
