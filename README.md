@@ -1,5 +1,5 @@
-![NuGet](https://img.shields.io/nuget/v/AspNetCore.Mvc.ViewComponentSlots.svg?style=for-the-badge)
-![NuGet](https://img.shields.io/nuget/dt/AspNetCore.Mvc.ViewComponentSlots.svg?style=for-the-badge)
+[![NuGet](https://img.shields.io/nuget/v/AspNetCore.Mvc.ViewComponentSlots.svg?style=for-the-badge)](https://www.nuget.org/packages/AspNetCore.Mvc.ViewComponentSlots/)
+[![NuGet](https://img.shields.io/nuget/dt/AspNetCore.Mvc.ViewComponentSlots.svg?style=for-the-badge)](https://www.nuget.org/packages/AspNetCore.Mvc.ViewComponentSlots/)
 
 # Summary
 
