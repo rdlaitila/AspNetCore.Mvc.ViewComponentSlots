@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackageId>AspNetCore.Mvc.ViewComponentSlots</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Regan Laitila</Authors>
+    <Company></Company>
+    <PackageTags>Microsoft.AspNetCore.Mvc;TagHelpers;Child Content;Components</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/rdlaitila/AspNetCore.Mvc.ViewComponentSlots</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

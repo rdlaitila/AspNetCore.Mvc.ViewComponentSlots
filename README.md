@@ -1,8 +1,21 @@
+![NuGet](https://img.shields.io/nuget/v/AspNetCore.Mvc.ViewComponentSlots.svg?style=for-the-badge)
+![NuGet](https://img.shields.io/nuget/dt/AspNetCore.Mvc.ViewComponentSlots.svg?style=for-the-badge)
+
 # Summary
 
 This repo provides an experimental implementation for the View Component Slots proposal detailed [here](https://github.com/aspnet/Mvc/issues/8168)
 
 View Component Slots provides a mechanism to render user supplied child content of a View Component tag helper into the View Component's view template.
+
+# Installation
+
+Install the nuget package https://www.nuget.org/packages/AspNetCore.Mvc.ViewComponentSlots/
+
+Place an add tag helpers direction in your `_ViewImports.cshtml`
+
+```html
+@addTagHelper *, AspNetCore.Mvc.ViewComponentSlots
+```
 
 # View Component Tag Helper
 
