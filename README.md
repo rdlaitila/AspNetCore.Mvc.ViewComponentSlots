@@ -11,7 +11,7 @@ View Component Slots provides a mechanism to render user supplied child content 
 
 Install the nuget package https://www.nuget.org/packages/AspNetCore.Mvc.ViewComponentSlots/
 
-Place an add tag helpers direction in your `_ViewImports.cshtml`
+Place an add tag helpers directive in your `_ViewImports.cshtml`
 
 ```html
 @addTagHelper *, AspNetCore.Mvc.ViewComponentSlots
