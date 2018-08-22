@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PackageId>AspNetCore.Mvc.ViewComponentSlots</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <Authors>Regan Laitila</Authors>
     <Company></Company>
     <PackageTags>Microsoft.AspNetCore.Mvc;TagHelpers;Child Content;Components</PackageTags>
@@ -12,7 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="[2.0, 3.0)" />
+  </ItemGroup>
+
+  <ItemGroup>
   </ItemGroup>
 
 </Project>
